@@ -20,7 +20,7 @@ module.exports = {
      * @type object
      */
     assets: {
-        js: [__dirname + "/mar10/fancytree/dist/jquery.fancytree-all.min.js"],
-        css: [__dirname + "/mar10/fancytree/dist/skin-win8/ui.fancytree.min.css"]
+        js: [__dirname + "/mar10/fancytree/dist/jquery.fancytree-all.min.js", __dirname + "/wi.core.treeview.event.js"],
+        css: [__dirname + "/mar10/fancytree/dist/skin-awesome/ui.fancytree.min.css"]
     }
 };
