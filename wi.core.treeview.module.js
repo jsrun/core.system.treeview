@@ -12,7 +12,8 @@
 
 "use strict";
 
-let SystemException = require("../wi.core.exception.js");
+let SystemException = require("../wi.core.exception.js"),
+    TemplateEngine = require("../wi.core.template.js");
 
 module.exports = {    
     /**
@@ -20,7 +21,17 @@ module.exports = {
      * @type object
      */
     assets: {
-        js: [__dirname + "/fancytree/dist/jquery.fancytree-all.min.js", __dirname + "/wi.core.treeview.event.js"],
-        css: [__dirname + "/fancytree/dist/skin-awesome/ui.fancytree.min.css"]
+        js:  [__dirname + "/fancytree/dist/jquery.fancytree-all.min.js", __dirname + "/fancytree/lib/contextmenu-abs/jquery.contextMenu-custom.js", __dirname + "/wi.core.treeview.event.js"],
+        css: [__dirname + "/fancytree/dist/skin-awesome/ui.fancytree.min.css", __dirname + "/fancytree/lib/contextmenu-abs/jquery.contextMenu.css"]
+    },
+    
+    /**
+     * Function to generate template
+     * 
+     * @param object webide
+     * @return string
+     */
+    getTemplate: function(settings, dirname, argv, app, i18n, passport, mongodb, webide){
+        return TemplateEngine(__dirname + "/wi.core.treeview.tpl.ejs").seti18n(i18n).render();
     }
 };
