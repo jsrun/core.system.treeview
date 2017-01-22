@@ -21,8 +21,8 @@ module.exports = {
      * @type object
      */
     assets: {
-        js:  [__dirname + "/fancytree/dist/jquery.fancytree-all.min.js", __dirname + "/fancytree/lib/contextmenu-abs/jquery.contextMenu-custom.js", __dirname + "/wi.core.treeview.event.js"],
-        css: [__dirname + "/fancytree/dist/skin-awesome/ui.fancytree.min.css", __dirname + "/fancytree/lib/contextmenu-abs/jquery.contextMenu.css"]
+        js:  [__dirname + "/node_modules/jquery.fancytree/dist/jquery.fancytree-all.min.js", __dirname + "/node_modules/jquery.fancytree/lib/contextmenu-abs/jquery.contextMenu-custom.js"],
+        css: [__dirname + "/node_modules/jquery.fancytree/dist/skin-awesome/ui.fancytree.min.css", __dirname + "/node_modules/jquery.fancytree/lib/contextmenu-abs/jquery.contextMenu.css"]
     },
     
     /**
@@ -32,6 +32,6 @@ module.exports = {
      * @return string
      */
     getTemplate: function(settings, dirname, argv, app, i18n, passport, mongodb, webide){
-        return TemplateEngine(__dirname + "/wi.core.treeview.tpl.ejs").seti18n(i18n).render();
+        return TemplateEngine(__dirname + "/template.ejs").seti18n(i18n).render();
     }
 };
