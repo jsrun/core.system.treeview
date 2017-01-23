@@ -24,9 +24,14 @@ webide.module("treeview", function(){
             $(id).each(function(){
                 $(this).fancytree({
                     clickFolderMode: 2,
-                    extensions: ["glyph"],
+                    extensions: ["glyph", "persist"],
                     createNode: function(event, data){
                         webide.treeview._bindContextMenu(data.node, data.node.span, data.node.data.type);
+                    },
+                    persist: {
+                        expandLazy: true,
+                        overrideSource: true,
+                        store: "local"
                     },
                     glyph: {
                         map: {
