@@ -1,7 +1,7 @@
 {
     "name": "wi.core.treeview",
     "version": "0.2.2",
-    "description": "WebIDE terminal management module",
+    "description": "WebIDE treeview management",
     "author": "André Ferreira <andrehrf@gmail.com>",
     "license": "MIT",
     "repository": {

@@ -88,7 +88,7 @@ webide.module("treeview", function(){
                             case "pause": webide.terminal.exec(node.key, "docker-compose pause " + node.data.serviceName, "workspace:refresh"); break;
                             case "unpause": webide.terminal.exec(node.key, "docker-compose unpause " + node.data.serviceName, "workspace:refresh"); break;
                             case "stop": webide.terminal.exec(node.key, "docker-compose stop " + node.data.serviceName, "workspace:refresh"); break;
-                            case "up": webide.terminal.exec(node.key, "docker-compose up -d --build --remove-orphans", "workspace:refresh"); break;
+                            case "up": webide.terminal.exec(node.key, "docker-compose up -d --remove-orphans", "workspace:refresh"); break;
                             case "down": webide.terminal.exec(node.key, "docker-compose down --remove-orphans", "workspace:refresh"); break;
                             case "settings": webide.file.open(node.key + "/docker-compose.yml");  break;
                             case "exec": webide.terminal.exec(node.key); break;
