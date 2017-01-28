@@ -80,42 +80,10 @@ webide.module("treeview", function(){
         /**
          * Function for associating contextmenu
          * 
+         * @param object node
+         * @param object span
+         * @param string type
          */
-        _bindContextMenu: function(node, span, type){
-            switch(type){
-                case "container": 
-                    $(span).contextMenu({menu: "containerContextMenu"}, function(action, el, pos) {
-                        console.log(node);
-                        switch(action){
-                            case "build": webide.terminal.exec(node.key, "docker-compose build --no-cache --force-rm", "workspace:refresh"); break;
-                            case "create": webide.terminal.exec(node.key, "docker-compose create --force-recreate --build ", "workspace:refresh"); break;
-                            case "start": webide.terminal.exec(node.key, "docker-compose start " + node.data.serviceName, "workspace:refresh"); break;
-                            case "restart": webide.terminal.exec(node.key, "docker-compose restart " + node.data.serviceName, "workspace:refresh"); break;
-                            case "pause": webide.terminal.exec(node.key, "docker-compose pause " + node.data.serviceName, "workspace:refresh"); break;
-                            case "unpause": webide.terminal.exec(node.key, "docker-compose unpause " + node.data.serviceName, "workspace:refresh"); break;
-                            case "stop": webide.terminal.exec(node.key, "docker-compose stop " + node.data.serviceName, "workspace:refresh"); break;
-                            case "up": webide.terminal.exec(node.key, "docker-compose up -d --remove-orphans", "workspace:refresh"); break;
-                            case "down": webide.terminal.exec(node.key, "docker-compose down --remove-orphans", "workspace:refresh"); break;
-                            case "settings": webide.file.open(node.key + "/docker-compose.yml");  break;
-                            case "exec": webide.terminal.exec(node.key); break;
-                        }
-                    });
-                break;
-                case "folder": 
-                    $(span).contextMenu({menu: "diretoryContextMenu"}, function(action, el, pos) {
-                        switch(action){
-                            case "open": break;
-                        }
-                    });
-                break;
-                case "file": 
-                    $(span).contextMenu({menu: "fileContextMenu"}, function(action, el, pos) {
-                        switch(action){
-                            case "open": webide.file.open(node.key); break;
-                        }
-                    });
-                break;
-            }
-        }
+        _bindContextMenu: function(node, span, type){}
     });
 });
