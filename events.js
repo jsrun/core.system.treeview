@@ -13,20 +13,26 @@
 "use strict";
 
 webide.module("treeview", function(){
-    this.treeview = {
+    this.extends("treeview", {
         /**
          * Function to create treeview
          * 
          * @param string id
          * @return void
          */
-        create: function(id){
+        create: function(id, options){
+            if(!options)
+                options = {};
+                        
             $(id).each(function(){
                 $(this).fancytree({
                     clickFolderMode: 2,
                     extensions: ["glyph", "persist"],
                     createNode: function(event, data){
-                        webide.treeview._bindContextMenu(data.node, data.node.span, data.node.data.type);
+                        if(typeof options.contextmenu == "function")
+                            options.contextmenu(data.node, data.node.span, data.node.data.type);
+                        else
+                            webide.treeview._bindContextMenu(data.node, data.node.span, data.node.data.type);
                     },
                     persist: {
                         expandLazy: true,
@@ -64,7 +70,7 @@ webide.module("treeview", function(){
                         }
                     },
                     click: function(event, data) {
-                        if(!data.node.folder)
+                        if(data.node.data.type == "file")
                             webide.file.open(data.node.key);
                     }
                 });
@@ -111,7 +117,5 @@ webide.module("treeview", function(){
                 break;
             }
         }
-    };
-        
-    webide.treeview.create(".wi-treeview");       
+    });
 });
