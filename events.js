@@ -23,11 +23,18 @@ webide.module("treeview", function(){
         create: function(id, options){
             if(!options)
                 options = {};
+            
+            var editBeforeEditFn = options.beforeEdit || function(){};
+            var editEditFn = options.edit || function(){};
+            var editBeforeCloseFn = options.beforeClose || function(){};
+            var editSaveFn = options.save || function(){};
+            
                         
             $(id).each(function(){
                 $(this).fancytree({
                     clickFolderMode: 2,
-                    extensions: ["glyph", "persist"],
+                    tooltip: true,
+                    extensions: ["glyph", "persist", "edit", "wide", "dnd"],
                     createNode: function(event, data){
                         if(typeof options.contextmenu == "function")
                             options.contextmenu(data.node, data.node.span, data.node.data.type);
@@ -38,6 +45,25 @@ webide.module("treeview", function(){
                         expandLazy: true,
                         overrideSource: true,
                         store: "local"
+                    },
+                    edit: {
+                        adjustWidthOfs: 4,
+                        inputCss: { minWidth: "3em" },
+                        triggerStart: ["f2", "shift+click", "mac+enter"],
+                        beforeEdit: editBeforeEditFn,
+                        edit: editEditFn,
+                        beforeClose: editBeforeCloseFn,
+                        save: editSaveFn
+                    },
+                    dnd: {
+                        autoExpandMS: 1500, 
+                        preventForeignNodes: false,  
+                        preventNonNodes: false,     
+                        preventRecursiveMoves: true, 
+                        preventVoidMoves: true,    
+                        scroll: true,              
+                        scrollSensitivity: 20,     
+                        scrollSpeed: 5,
                     },
                     glyph: {
                         map: {
@@ -69,7 +95,7 @@ webide.module("treeview", function(){
                             data: {key: node.key}
                         }
                     },
-                    click: function(event, data) {
+                    dblclick: function(event, data) {
                         if(data.node.data.type == "file")
                             webide.file.open(data.node.key);
                     }
