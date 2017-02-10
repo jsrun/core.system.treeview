@@ -1,6 +1,6 @@
 {
     "name": "wi.core.treeview",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "description": "WebIDE treeview management",
     "author": "André Ferreira <andrehrf@gmail.com>",
     "license": "MIT",
