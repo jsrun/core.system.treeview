@@ -104,6 +104,16 @@ webide.module("treeview", function(){
         },
         
         /**
+         * Function to refresh treeview
+         * 
+         * @param string id
+         * @return void
+         */
+        refresh(id){
+            $(id).fancytree().reload();
+        },
+        
+        /**
          * Function for associating contextmenu
          * 
          * @param object node
