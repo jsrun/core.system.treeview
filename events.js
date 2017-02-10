@@ -28,18 +28,28 @@ webide.module("treeview", function(){
             var editEditFn = options.edit || function(){};
             var editBeforeCloseFn = options.beforeClose || function(){};
             var editSaveFn = options.save || function(){};
-            
-                        
+                                    
             $(id).each(function(){
                 $(this).fancytree({
                     clickFolderMode: 2,
                     tooltip: true,
                     extensions: ["glyph", "persist", "edit", "wide", "dnd"],
                     createNode: function(event, data){
-                        if(typeof options.contextmenu == "function")
-                            options.contextmenu(data.node, data.node.span, data.node.data.type);
-                        else
-                            webide.treeview._bindContextMenu(data.node, data.node.span, data.node.data.type);
+                        try{
+                            if(typeof options.contextmenu == "function")
+                                options.contextmenu(data.node, data.node.span, data.node.data.type);
+                            else
+                                webide.treeview._bindContextMenu(data.node, data.node.span, data.node.data.type);
+                        }catch(e){}
+                    },
+                    restore: function(event, data){
+                        try{
+                            if(typeof options.contextmenu == "function")
+                                if(data.node.span && data.node && data.node.data.type)
+                                    options.contextmenu(data.node, data.node.span, data.node.data.type);
+                            else
+                                webide.treeview._bindContextMenu(data.node, data.node.span, data.node.data.type);
+                        }catch(e){}
                     },
                     persist: {
                         expandLazy: true,
